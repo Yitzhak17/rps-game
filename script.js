@@ -5,9 +5,10 @@ const score = {
   ties: 0
 };
 
+let dislpay = document.getElementById("display-result");
+
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
-  let dislpay = document.getElementById("display-result");
   let result = '';
 
   function pickComputerMove() {
@@ -39,6 +40,7 @@ function playGame(playerMove) {
   }
 
 
+
   function playerPapper() {
     if (computerMove === 'Papper') {
       result = 'Tie'
@@ -68,13 +70,23 @@ function playGame(playerMove) {
   } else if (playerMove === 'Scissors') {
     playerScissors();
   }
+
+  if (result === 'You Win') {
+    score.wins += 1;
+  } else if (result === 'You Lose') {
+    score.loses += 1;
+  } else {
+    score.ties += 1;
+  }
+  dislpay.innerHTML += `
+   Wins:${score.wins} Losses:${score.loses} Ties:${score.ties}`
+
 }
 
-
-
 function resetGame() {
-  computerMove = ``;
-  result = ``;
-  dislpay.textContent = `Let Play Game`
-  computerChose();
+  score.wins = 0;
+  score.loses = 0;
+  score.ties = 0;
+  dislpay.innerHTML = `Let Play Game`
+
 }
