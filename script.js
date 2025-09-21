@@ -5,9 +5,9 @@ let score = JSON.parse(localStorage.getItem('score')) || {
   ties: 0
 };
 
-
-
 let dislpay = document.getElementById("display-result");
+
+updateSocre();
 
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
@@ -80,18 +80,23 @@ function playGame(playerMove) {
   } else {
     score.ties += 1;
   }
-  dislpay.innerHTML += `
-   Wins:${score.wins} Losses:${score.loses} Ties:${score.ties}`
 
+  updateSocre();
   localStorage.setItem('score', JSON.stringify(score));
 
 }
 
+function updateSocre() {
+  let resultScore = document.querySelector('#js-result')
+  resultScore.innerHTML = `Wins:${score.wins}, Losses:${score.loses}, Ties:${score.ties}`
+
+}
 function resetGame() {
   score.wins = 0;
   score.loses = 0;
   score.ties = 0;
   localStorage.removeItem('score');
   dislpay.innerHTML = `Let Play Game`
+  updateSocre();
 
 }
