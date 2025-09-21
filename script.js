@@ -1,9 +1,11 @@
 
-const score = {
+let score = JSON.parse(localStorage.getItem('score')) || {
   wins: 0,
   loses: 0,
   ties: 0
 };
+
+
 
 let dislpay = document.getElementById("display-result");
 
@@ -81,12 +83,15 @@ function playGame(playerMove) {
   dislpay.innerHTML += `
    Wins:${score.wins} Losses:${score.loses} Ties:${score.ties}`
 
+  localStorage.setItem('score', JSON.stringify(score));
+
 }
 
 function resetGame() {
   score.wins = 0;
   score.loses = 0;
   score.ties = 0;
+  localStorage.removeItem('score');
   dislpay.innerHTML = `Let Play Game`
 
 }
