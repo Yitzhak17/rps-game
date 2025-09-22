@@ -73,7 +73,7 @@ function updateScore() {
   displayScore.innerHTML = `Wins: ${score.wins}, Losses: ${score.loses}, Ties: ${score.ties}`;
 }
 
-function resetGame() {
+function resetScore() {
   score.wins = 0;
   score.loses = 0;
   score.ties = 0;
