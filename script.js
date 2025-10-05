@@ -6,8 +6,8 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 
 let result = '';
 
-let displayResult = document.getElementById('js-result');
-let displayMoves = document.getElementById('js-moves');
+let displayResult = document.querySelector('.js-result');
+let displayMoves = document.querySelector('.js-moves');
 
 updateScore();
 
@@ -54,7 +54,8 @@ function playGame(playerMove) {
   }
 
   displayResult.textContent = result;
-  displayMoves.textContent = `You: ${playerMove} - Computer: ${computerMove}`;
+  displayMoves.innerHTML = `You <img src="./images/${playerMove}-emoji.png" class="move-icon"><img src="./images/${computerMove}-emoji.png"
+      class="move-icon">Computer`;
 
   if (result === 'You Win') {
     score.wins += 1;
@@ -69,7 +70,7 @@ function playGame(playerMove) {
 }
 
 function updateScore() {
-  let displayScore = document.getElementById('js-score');
+  let displayScore = document.querySelector('.js-score');
   displayScore.innerHTML = `Wins: ${score.wins}, Losses: ${score.loses}, Ties: ${score.ties}`;
 }
 
