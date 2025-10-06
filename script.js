@@ -11,21 +11,40 @@ let displayMoves = document.querySelector('.js-moves');
 
 updateScore();
 
+let isAutoPlay = false;
+let intervalId = null;
+
+function autoPlay() {
+  if (!isAutoPlay) {
+    intervalId = setInterval(() => {
+      const playerMove = pickComputerMove(); // assumed global
+      playGame(playerMove);                  // assumed global
+    }, 1000);
+    isAutoPlay = true;
+  } else {
+    clearInterval(intervalId);
+    intervalId = null;
+    isAutoPlay = false;
+  }
+}
+function pickComputerMove() {
+  const randomNumber = Math.random();
+  let computerMove = '';
+  if (randomNumber >= 0 && randomNumber < 1 / 3) {
+    computerMove = 'Rock';
+  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+    computerMove = 'Paper';
+  } else {
+    computerMove = 'Scissors';
+  }
+  return computerMove;
+}
+
+
+
 function playGame(playerMove) {
   const computerMove = pickComputerMove();
 
-  function pickComputerMove() {
-    const randomNumber = Math.random();
-    let computerMove = '';
-    if (randomNumber >= 0 && randomNumber < 1 / 3) {
-      computerMove = 'Rock';
-    } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
-      computerMove = 'Paper';
-    } else {
-      computerMove = 'Scissors';
-    }
-    return computerMove;
-  }
 
   if (playerMove === 'Rock') {
     if (computerMove === 'Rock') {
